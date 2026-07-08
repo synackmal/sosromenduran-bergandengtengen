@@ -44,34 +44,34 @@
   --radius: 0.875rem;
 
   /* Base */
-  --cream: oklch(0.975 0.02 85);
-  --background: oklch(0.98 0.015 85);
-  --foreground: oklch(0.22 0.03 200);
+  --cream: oklch(79.766% 0.10673 83.428);
+  --background: oklch(82.519% 0.11528 85.106);
+  --foreground: oklch(22% 0.03 200);
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.03 200);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.03 200);
+  --card: oklch(100% 0 0);
+  --card-foreground: oklch(22% 0.03 200);
+  --popover: oklch(100% 0 0);
+  --popover-foreground: oklch(22% 0.03 200);
 
   /* Deep teal — pusaka */
-  --primary: oklch(0.38 0.08 195);
-  --primary-foreground: oklch(0.98 0.015 85);
+  --primary: oklch(38% 0.08 195);
+  --primary-foreground: oklch(98% 0.015 85);
 
   /* Terracotta — genteng */
-  --terracotta: oklch(0.62 0.15 40);
-  --gold: oklch(0.78 0.13 85);
+  --terracotta: oklch(62% 0.15 40);
+  --gold: oklch(78% 0.13 85);
 
-  --secondary: oklch(0.94 0.03 85);
-  --secondary-foreground: oklch(0.28 0.04 200);
-  --muted: oklch(0.94 0.02 85);
-  --muted-foreground: oklch(0.48 0.03 200);
-  --accent: oklch(0.62 0.15 40);
-  --accent-foreground: oklch(0.98 0.015 85);
+  --secondary: oklch(94% 0.03 85);
+  --secondary-foreground: oklch(28% 0.04 200);
+  --muted: oklch(94% 0.02 85);
+  --muted-foreground: oklch(48% 0.03 200);
+  --accent: oklch(62% 0.15 40);
+  --accent-foreground: oklch(98% 0.015 85);
 
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.88 0.02 85);
-  --input: oklch(0.9 0.02 85);
+  --destructive: oklch(57.7% 0.245 27.325);
+  --destructive-foreground: oklch(98.4% 0.003 247.858);
+  --border: oklch(88% 0.02 85);
+  --input: oklch(90% 0.02 85);
   --ring: oklch(0.38 0.08 195);
 }
 
