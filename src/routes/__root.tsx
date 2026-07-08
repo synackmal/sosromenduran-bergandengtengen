@@ -81,9 +81,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Profil resmi Kalurahan Sosromenduran, Gedongtengen, Yogyakarta — kenali 7 kampung, UMKM, kuliner, dan atmosfer khas Jogja.",
+          "Profil resmi Kalurahan Sosromenduran, Gedongtengen, Yogyakarta. Kenali 7 kampung, UMKM, kuliner, dan atmosfer khas Jogja.",
       },
-      { name: "author", content: "Tim KKN Sosromenduran" },
+      { name: "author", content: "Tim KKN-PPM UGM Sosromenduran" },
       { property: "og:title", content: "Bergandeng Tengen · Kalurahan Sosromenduran" },
       {
         property: "og:description",
@@ -101,7 +101,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.ico.png", type: "image/x-icon" },
     ],
   }),
   shellComponent: RootShell,
