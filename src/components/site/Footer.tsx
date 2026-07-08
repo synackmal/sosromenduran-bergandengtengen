@@ -39,12 +39,12 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-sm opacity-90">
             <li>Kantor Kalurahan Sosromenduran</li>
             <li>Kec. Gedongtengen, Yogyakarta</li>
-            <li>Email: info@sosromenduran.id</li>
+            <li>Email: XXX@xxx.com</li>
           </ul>
         </div>
       </div>
       <div className="border-t border-white/10 py-4 text-center text-xs opacity-70">
-        © {new Date().getFullYear()} Bergandeng Tengen · Dibuat oleh Tim KKN
+        © {new Date().getFullYear()} Bergandeng Tengen · Dibuat oleh Tim KKN-PPM UGM 2026
       </div>
     </footer>
   );

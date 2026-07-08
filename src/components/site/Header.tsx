@@ -9,7 +9,7 @@ const navItems = [
   { to: "/", label: "Beranda" },
   { to: "/profil", label: "Profil" },
   { to: "/kampung", label: "Kampung" },
-  { to: "/umkm", label: "UMKM" },
+  { to: "/umkm", label: "UMKM & Kuliner" },
   { to: "/galeri", label: "Galeri" },
   { to: "/peta", label: "Peta" },
   { to: "/tim", label: "Profil Tim" },

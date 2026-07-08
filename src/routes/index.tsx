@@ -41,8 +41,7 @@ function Landing() {
             <span className="text-[color:var(--gold)]">Tengen</span>
           </h1>
           <p className="mt-5 max-w-xl text-base opacity-90 sm:text-lg">
-            Berjalan bersisian, bergotong royong — semangat warga Sosromenduran
-            menjaga kampung, budaya, dan denyut kota Jogja.
+            Jelajati tujuh kampung unik di jantung Kota Yogyakarta, temukan keunggulan, UMKM, dan kuliner di sini.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -67,7 +66,7 @@ function Landing() {
             </div>
             <div>
               <dt className="text-[11px] uppercase tracking-widest opacity-70">RT</dt>
-              <dd className="mt-1 font-display text-3xl font-bold">55</dd>
+              <dd className="mt-1 font-display text-3xl font-bold">54</dd>
             </div>
           </dl>
         </div>
@@ -84,7 +83,7 @@ function Landing() {
           </h2>
           <p className="text-muted-foreground">
             Kalurahan di jantung Kota Yogyakarta yang memayungi tujuh kampung dengan
-            karakter unik — dari gerbang Malioboro yang ramai hingga gang sunyi bersejarah.
+            karakter unik, dari gerbang Malioboro yang ramai hingga gang sunyi bersejarah.
           </p>
         </div>
 
