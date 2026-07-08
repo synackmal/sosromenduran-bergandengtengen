@@ -12,7 +12,7 @@ const navItems = [
   { to: "/umkm", label: "UMKM" },
   { to: "/galeri", label: "Galeri" },
   { to: "/peta", label: "Peta" },
-  { to: "/tim", label: "Tim" },
+  { to: "/tim", label: "Profil Tim" },
 ] as const;
 
 export function Header() {
