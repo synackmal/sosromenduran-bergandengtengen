@@ -54,16 +54,8 @@ function collectTextFields(values: Array<string | undefined | null>): string[] {
   return values.filter((value): value is string => Boolean(value && value.trim()));
 }
 
-function buildBulletList(items: string[]): string {
-  return items.map((item) => `• ${item}`).join("\n");
-}
-
 function joinWithSeparator(lines: string[]): string {
   return lines.filter(Boolean).join("\n");
-}
-
-function createSection(title: string, content: string): string {
-  return [title, content].filter(Boolean).join("\n\n");
 }
 
 function searchRecords<T>(
@@ -163,11 +155,15 @@ function getWisataSearchFields(wisata: Wisata): string[] {
 }
 
 function getTeamSearchFields(member: TeamMember): string[] {
-  return collectTextFields([member.nama, member.peran, member.inisial]);
-}
-
-function summarizeCount(label: string, total: number): string {
-  return `${label} saat ini tercatat ${total} item.`;
+  return collectTextFields([
+    member.nama,
+    member.peran,
+    member.inisial,
+    member.divisi,
+    member.deskripsi,
+    ...member.kontribusi,
+    ...member.keahlian,
+  ]);
 }
 
 // ==========================
@@ -191,96 +187,81 @@ function detectIntent(message: string): FAQAction | null {
 // FORMATTERS
 // ==========================
 function formatProfile(profile: ProfilKalurahan): string {
-  return joinWithSeparator([
-    `👤 ${profile.nama}`,
-    profile.deskripsi,
-    "",
-    `Kemantren: ${profile.kemantren}`,
-    `Kota: ${profile.kota}`,
-    `Provinsi: ${profile.provinsi}`,
-    "",
-    `Visi: ${profile.visi}`,
-    "",
-    `Misi:`,
-    buildBulletList(profile.misi),
-    "",
-    `Potensi:`,
-    buildBulletList(profile.potensi),
-    "",
-    `Jumlah kampung: ${profile.jumlahKampung}`,
-    `Daftar kampung: ${profile.daftarKampung.join(", ")}`,
-    "",
-    `Kontak:`,
-    buildBulletList([
-      `Alamat: ${profile.kontak.alamat}`,
-      `Telepon: ${profile.kontak.telepon}`,
-      `Email: ${profile.kontak.email}`,
-      `Website: ${profile.kontak.website}`,
-    ]),
-    "",
-    `Sosial:`,
-    buildBulletList([
-      `PKK: ${profile.sosial.pkk}`,
-      `Karang Taruna: ${profile.sosial.karangTaruna}`,
-      `Bank Sampah: ${profile.sosial.bankSampah}`,
-      `Posyandu: ${profile.sosial.posyandu}`,
-    ]),
-  ]);
+  return `
+🏡 ${profile.nama}
+
+Kalurahan Sosromenduran berada di Kemantren Gedongtengen, Kota Yogyakarta.
+
+Wilayah ini dikenal memiliki beragam potensi wisata, UMKM, serta kehidupan masyarakat yang aktif dan harmonis.
+
+Kalau ingin informasi yang lebih lengkap, kamu bisa membuka halaman Profil.
+`.trim();
 }
 
 function formatKampung(kampung: Kampung): string {
-  return joinWithSeparator([
-    `${kampung.icon} ${kampung.nama}`,
-    kampung.tagline,
-    "",
-    kampung.deskripsi,
-    "",
-    `Sejarah: ${kampung.sejarah}`,
-    "",
-    `Highlight: ${kampung.highlight}`,
-    "",
-    `Potensi: ${kampung.potensi.join(", ")}`,
-    `Keunggulan: ${kampung.keunggulan.join(", ")}`,
-    `Fasilitas: ${kampung.fasilitas.join(", ")}`,
-  ]);
+  return `
+${kampung.icon} ${kampung.nama}
+
+${kampung.nama} merupakan salah satu kampung di Kalurahan Sosromenduran. Dikenal dengan identitas "${kampung.tagline}", kawasan ini memiliki keunikan tersendiri.
+
+${kampung.deskripsi}
+
+📍 Highlight:
+${kampung.highlight}
+`.trim();
 }
 
 function formatUMKM(umkm: UMKM): string {
-  return joinWithSeparator([
-    `${umkm.icon} ${umkm.nama}`,
-    `${umkm.kategori} • ${umkm.kampung}`,
-    "",
-    umkm.deskripsi,
-    "",
-    `Produk unggulan: ${umkm.produkUnggulan.join(", ")}`,
-    `Alamat: ${umkm.alamat}`,
-    `Jam operasional: ${umkm.jamOperasional}`,
-    `Kontak: ${umkm.kontak}`,
-    `Instagram: ${umkm.instagram}`,
-    `Maps: ${umkm.maps}`,
-  ]);
+  return `
+${umkm.icon} ${umkm.nama}
+
+Kalau kamu sedang mencari informasi tentang ${umkm.kategori.toLowerCase()} di sekitar Sosromenduran, ${umkm.nama} bisa jadi salah satu pilihan.
+
+${umkm.deskripsi}
+
+📍 Lokasi:
+${umkm.alamat}
+
+🕘 Jam buka:
+${umkm.jamOperasional}
+`.trim();
 }
 
 function formatWisata(wisata: Wisata): string {
-  return joinWithSeparator([
-    `${wisata.icon} ${wisata.nama}`,
-    `${wisata.kategori} • ${wisata.kampung}`,
-    "",
-    wisata.deskripsi,
-    "",
-    `Highlight: ${wisata.highlight}`,
-    `Alamat: ${wisata.alamat}`,
-    `Jam operasional: ${wisata.jamOperasional}`,
-    `Tiket: ${wisata.tiket}`,
-  ]);
+  return `
+${wisata.icon} ${wisata.nama}
+
+${wisata.nama} merupakan destinasi ${wisata.kategori.toLowerCase()} yang berlokasi di kawasan sekitar. 
+
+${wisata.deskripsi}
+
+📍 Lokasi:
+${wisata.alamat}
+
+🕘 Jam buka:
+${wisata.jamOperasional}
+`.trim();
 }
 
 function formatTeamMember(member: TeamMember): string {
-  return `${member.inisial} • ${member.nama} — ${member.peran}`;
+  return `
+👨‍💻 ${member.nama}
+
+${member.nama} merupakan salah satu anggota Tim KKN-PPM UGM yang bertugas sebagai ${member.peran}.
+
+${member.deskripsi}
+
+😊 Senang bisa berkenalan!
+`.trim();
 }
 
-function formatList(items: string[]): string {
-  return items.join("\n");
+function formatList(items: string[], intro?: string): string {
+  const lines = items.map((item) => `• ${item}`);
+  const content = [intro, "", ...lines].filter(
+    (line): line is string => typeof line === "string" && line.length > 0
+  );
+
+  return joinWithSeparator(content);
 }
 
 // ==========================
@@ -302,10 +283,7 @@ function searchProfile(message: string): ProfilKalurahan | null {
 }
 
 function handleShowProfile(): string {
-  return createSection(
-    "👤 Profil Kalurahan",
-    formatProfile(profilKalurahan)
-  );
+  return formatProfile(profilKalurahan);
 }
 
 // ==========================
@@ -319,18 +297,11 @@ function searchKampung(message: string): Kampung[] {
 
 function handleListKampung(): string {
   const list = kampungList.map((kampung) => `${kampung.icon} ${kampung.nama}`);
-
-  return createSection(
-    "🏘️ Daftar kampung",
-    formatList(list)
-  );
+  return formatList(list, "Di Sosromenduran ada beberapa kampung yang menarik, antara lain:");
 }
 
 function handleCountKampung(): string {
-  return createSection(
-    "📊 Jumlah kampung",
-    `Kalurahan Sosromenduran memiliki ${kampungList.length} kampung berdasarkan data terbarunya.`
-  );
+  return `Di Sosromenduran ada ${kampungList.length} kampung, dan masing-masing punya karakter sendiri.`;
 }
 
 // ==========================
@@ -343,30 +314,19 @@ function searchUMKM(message: string): UMKM[] {
 }
 
 function handleListUMKM(): string {
-  const list = umkmList.map((umkm) => `${umkm.icon} ${umkm.nama} (${umkm.kategori})`);
-
-  return createSection(
-    "🛍️ Daftar UMKM",
-    formatList(list)
-  );
+  const list = umkmList.map((umkm) => `${umkm.icon} ${umkm.nama}`);
+  return formatList(list, "🛍️ UMKM yang tersedia:");
 }
 
 function handleKuliner(): string {
   const kuliner = umkmList.filter((item) => item.kategori === "Kuliner");
 
   if (kuliner.length === 0) {
-    return createSection(
-      "🍜 Kuliner",
-      "Belum ada data kuliner yang tersedia."
-    );
+    return "Belum ada data kuliner yang tersedia saat ini.";
   }
 
   const list = kuliner.map((item) => `${item.icon} ${item.nama} — ${item.deskripsi}`);
-
-  return createSection(
-    "🍜 Rekomendasi kuliner",
-    formatList(list)
-  );
+  return formatList(list, "Kalau kamu cari kuliner, beberapa tempat yang sering jadi favorit:");
 }
 
 // ==========================
@@ -380,11 +340,7 @@ function searchWisata(message: string): Wisata[] {
 
 function handleListWisata(): string {
   const list = wisataList.map((wisata) => `${wisata.icon} ${wisata.nama} (${wisata.kategori})`);
-
-  return createSection(
-    "📍 Daftar wisata",
-    formatList(list)
-  );
+  return formatList(list, "Kalau ingin melihat suasana sekitar, ada beberapa tempat yang menarik:");
 }
 
 // ==========================
@@ -397,12 +353,8 @@ function searchTim(message: string): TeamMember[] {
 }
 
 function handleListTim(): string {
-  const list = timDeveloper.map((member) => formatTeamMember(member));
-
-  return createSection(
-    "👨‍💻 Tim KKN",
-    formatList(list)
-  );
+  const list = timDeveloper.map((member) => `👨‍💻 ${member.nama} — ${member.peran}`);
+  return formatList(list, "Tim yang terlibat dalam pengembangan website ini:");
 }
 
 // ==========================
@@ -424,7 +376,7 @@ function searchGlobal(message: string): string | null {
   const sections: string[] = [];
 
   if (profileMatch) {
-    sections.push(createSection("👤 Profil", formatProfile(profileMatch)));
+    sections.push(formatProfile(profileMatch));
   }
 
   if (kampungMatches.length > 0) {
@@ -433,7 +385,7 @@ function searchGlobal(message: string): string | null {
       .map((kampung) => formatKampung(kampung))
       .join("\n\n");
 
-    sections.push(createSection("🏘️ Kampung", content));
+    sections.push(content);
   }
 
   if (umkmMatches.length > 0) {
@@ -442,7 +394,7 @@ function searchGlobal(message: string): string | null {
       .map((umkm) => formatUMKM(umkm))
       .join("\n\n");
 
-    sections.push(createSection("🛍️ UMKM", content));
+    sections.push(content);
   }
 
   if (wisataMatches.length > 0) {
@@ -451,23 +403,25 @@ function searchGlobal(message: string): string | null {
       .map((wisata) => formatWisata(wisata))
       .join("\n\n");
 
-    sections.push(createSection("📍 Wisata", content));
+    sections.push(content);
   }
 
   if (timMatches.length > 0) {
     const content = timMatches
       .slice(0, 3)
       .map((member) => formatTeamMember(member))
-      .join("\n");
+      .join("\n\n");
 
-    sections.push(createSection("👨‍💻 Tim", content));
+    sections.push(content);
   }
 
   if (sections.length === 0) {
     return null;
   }
 
-  return sections.join("\n\n");
+  const intro = "";
+
+  return [intro, ...sections].filter(Boolean).join("\n\n");
 }
 
 // ==========================
@@ -476,10 +430,13 @@ function searchGlobal(message: string): string | null {
 function executeIntent(intent: FAQAction): string {
   switch (intent) {
     case "GREETING":
-      return createSection(
-        "👋 Salam",
-        `Halo! Saya adalah chatbot lokal informasi Kalurahan Sosromenduran. Saya dapat membantu menampilkan profil, kampung, UMKM, wisata, dan tim.`
-      );
+      return `
+Halo! 👋
+
+Sugeng rawuh di Bergandeng Tengen.
+
+Aku Mas Menduran. Kalau kamu ingin mencari informasi mengenai kampung, UMKM, wisata, kuliner, ataupun Tim KKN, tinggal tanya saja ya. 😊
+`.trim();
 
     case "SHOW_PROFILE":
       return handleShowProfile();
@@ -503,10 +460,20 @@ function executeIntent(intent: FAQAction): string {
       return handleListTim();
 
     default:
-      return createSection(
-        "❓ Jawaban",
-        "Saya belum menemukan jawaban yang relevan untuk pertanyaan tersebut. Silakan coba tanyakan tentang profil, kampung, UMKM, kuliner, wisata, atau tim."
-      );
+      return `
+Maaf, aku belum menemukan informasi yang sesuai. 😅
+
+Coba gunakan kata kunci seperti:
+
+• profil
+• kampung
+• UMKM
+• kuliner
+• wisata
+• tim
+
+Aku akan coba bantu mencarikannya.
+`.trim();
   }
 }
 
@@ -526,19 +493,18 @@ export function getResponse(message: string): string {
     return globalResult;
   }
 
-  const fallback = createSection(
-    "❓ Jawaban",
-    [
-      `Saya belum menemukan informasi yang sesuai dengan permintaan Anda.`,
-      `Anda dapat bertanya seperti:`,
-      `• profil kalurahan`,
-      `• berapa jumlah kampung`,
-      `• daftar umkm`,
-      `• wisata di sosromenduran`,
-      `• anggota tim`,
-      `• kuliner di daerah ini`,
-    ].join("\n")
-  );
+  return `
+Maaf, aku belum menemukan informasi yang sesuai. 😅
 
-  return fallback;
+Coba gunakan kata kunci seperti:
+
+• profil
+• kampung
+• UMKM
+• kuliner
+• wisata
+• tim
+
+Aku akan coba bantu mencarikannya.
+`.trim();
 }
