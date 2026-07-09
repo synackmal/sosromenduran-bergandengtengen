@@ -2,36 +2,18 @@ import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { getResponse } from "@/services/chatbotService";
 
 type Msg = { role: "bot" | "user"; text: string };
-
-const knowledge: { keywords: string[]; answer: string }[] = [
-  {
-    keywords: ["kampung", "berapa", "7"],
-    answer: "Di Sosromenduran ada 7 kampung: Sosrowijayan, Sosromenduran, Jogonegaran, Dagen, Sosrodipuran, Pajeksan, dan Gandekan. Lihat halaman Kampung untuk detailnya!",
-  },
-  { keywords: ["umkm", "kuliner", "makan"], answer: "Coba mampir ke halaman UMKM & Kuliner — ada gudeg, bakmi jawa, angkringan, kopi, sampai batik tulis." },
-  { keywords: ["peta", "lokasi", "map"], answer: "Peta interaktif ada di halaman Peta (embed ArcGIS Online)." },
-  { keywords: ["galeri", "foto", "kegiatan"], answer: "Galeri foto kegiatan warga ada di halaman Galeri." },
-  { keywords: ["profil", "geografi", "sejarah"], answer: "Profil umum kalurahan (geografis, demografi, sejarah singkat) tersedia di halaman Profil." },
-  { keywords: ["tim", "developer", "kkn"], answer: "Website ini dikembangkan oleh Tim KKN — kenalan lebih dekat di halaman Tim." },
-  { keywords: ["halo", "hai", "hi"], answer: "Halo! Sugeng rawuh di Bergandeng Tengen 👋 Ada yang ingin ditanyakan soal Sosromenduran?" },
-];
-
-function reply(input: string): string {
-  const q = input.toLowerCase();
-  const hit = knowledge.find((k) => k.keywords.some((w) => q.includes(w)));
-  return (
-    hit?.answer ??
-    "Matur nuwun pertanyaannya! Coba tanyakan soal kampung, UMKM, peta, galeri, profil, atau tim kami ya."
-  );
-}
 
 export function Chatbot() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "bot", text: "Sugeng rawuh! Aku Mas Menduran, siap bantu menjelajah Kalurahan Sosromenduran 🙂" },
+    {
+      role: "bot",
+      text: "Sugeng rawuh! Aku Mas Menduran, asisten lokal Kalurahan Sosromenduran. Aku bisa menjawab pertanyaan tentang Profil, Kampung, UMKM, Kuliner, Wisata, dan Tim KKN 🙂",
+    },
   ]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -45,8 +27,8 @@ export function Chatbot() {
     setMessages((m) => [...m, { role: "user", text }]);
     setInput("");
     setTimeout(() => {
-      setMessages((m) => [...m, { role: "bot", text: reply(text) }]);
-    }, 400);
+      setMessages((m) => [...m, { role: "bot", text: getResponse(text) }]);
+    }, 500);
   };
 
   return (
@@ -91,7 +73,7 @@ export function Chatbot() {
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Tanya tentang Sosromenduran…"
+              placeholder="Contoh: UMKM, Dagen, Malioboro, Gudeg..."
               className="flex-1"
             />
             <Button type="submit" size="icon" aria-label="Kirim">

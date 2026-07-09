@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
-import { timDeveloper } from "@/data/kampung";
+import { timDeveloper } from "@/data/tim";
 import kknLogo from "@/assets/kkn-logo.png";
 
 export const Route = createFileRoute("/tim")({

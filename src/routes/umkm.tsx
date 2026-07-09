@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
-import { umkmList } from "@/data/kampung";
+import { umkmList } from "@/data/umkm";
 import umkmImg from "@/assets/umkm-kuliner.jpg";
 
 export const Route = createFileRoute("/umkm")({
@@ -34,9 +34,9 @@ function UMKM() {
             <div key={u.nama} className="rounded-2xl border border-border bg-card p-5 transition hover:-translate-y-1 hover:shadow-lg">
               <div className="flex items-start justify-between">
                 <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-widest text-primary">
-                  {u.jenis}
+                  {u.kategori}
                 </span>
-                <span className="text-3xl">{u.emoji}</span>
+                <span className="text-3xl">{u.icon}</span>
               </div>
               <div className="mt-3 font-display text-xl font-bold">{u.nama}</div>
               <p className="mt-1 text-sm text-muted-foreground">{u.deskripsi}</p>

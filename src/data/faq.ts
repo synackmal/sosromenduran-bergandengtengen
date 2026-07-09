@@ -1,58 +1,104 @@
 export type FAQAction =
   | "GREETING"
+
+  | "SHOW_PROFILE"
+
   | "COUNT_KAMPUNG"
   | "LIST_KAMPUNG"
+
   | "LIST_UMKM"
   | "LIST_KULINER"
-  | "SHOW_PROFIL"
-  | "SHOW_WISATA"
-  | "SHOW_TIM";
+
+  | "LIST_WISATA"
+
+  | "LIST_TIM";
 
 export interface FAQItem {
-  id: number;
   keywords: string[];
   action: FAQAction;
 }
 
 export const faq: FAQItem[] = [
   {
-    id: 1,
-    keywords: ["halo", "hai", "hi", "assalamualaikum"],
+    keywords: [
+      "halo",
+      "hai",
+      "hi",
+      "selamat pagi",
+      "selamat siang",
+      "selamat sore",
+      "selamat malam",
+      "assalamualaikum"
+    ],
     action: "GREETING",
   },
+
   {
-    id: 2,
-    keywords: ["berapa kampung", "jumlah kampung"],
+    keywords: [
+      "profil",
+      "tentang sosromenduran",
+      "kalurahan",
+      "apa itu sosromenduran",
+      "deskripsi"
+    ],
+    action: "SHOW_PROFILE",
+  },
+
+  {
+    keywords: [
+      "berapa kampung",
+      "jumlah kampung",
+      "ada berapa kampung"
+    ],
     action: "COUNT_KAMPUNG",
   },
+
   {
-    id: 3,
-    keywords: ["kampung apa saja", "daftar kampung"],
+    keywords: [
+      "daftar kampung",
+      "nama kampung",
+      "kampung apa saja"
+    ],
     action: "LIST_KAMPUNG",
   },
+
   {
-    id: 4,
-    keywords: ["umkm"],
+    keywords: [
+      "umkm",
+      "usaha",
+      "produk lokal"
+    ],
     action: "LIST_UMKM",
   },
+
   {
-    id: 5,
-    keywords: ["kuliner", "makanan", "tempat makan"],
+    keywords: [
+      "kuliner",
+      "makanan",
+      "tempat makan",
+      "makan"
+    ],
     action: "LIST_KULINER",
   },
+
   {
-    id: 6,
-    keywords: ["profil", "sejarah"],
-    action: "SHOW_PROFIL",
+    keywords: [
+      "wisata",
+      "tempat wisata",
+      "landmark",
+      "destinasi"
+    ],
+    action: "LIST_WISATA",
   },
+
   {
-    id: 7,
-    keywords: ["wisata", "destinasi"],
-    action: "SHOW_WISATA",
-  },
-  {
-    id: 8,
-    keywords: ["tim", "developer", "kkn"],
-    action: "SHOW_TIM",
+    keywords: [
+      "tim",
+      "anggota",
+      "kkn",
+      "developer",
+      "siapa yang membuat"
+    ],
+    action: "LIST_TIM",
   },
 ];

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
-import { galeriFoto } from "@/data/kampung";
+import { galeriFoto } from "@/data/galeri";
 
 export const Route = createFileRoute("/galeri")({
   head: () => ({
